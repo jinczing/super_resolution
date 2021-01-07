@@ -1,0 +1,34 @@
+# general settings
+name: 051_RRDBNet_PSNR_x3_f64b23_DIV2K_600k_B16G1_wandb_test
+model_type: SRModel
+scale: 3
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+
+# dataset and data loader settings
+datasets:
+  test_1:
+    name: MYSETTEST
+    type: SingleImageDataset
+    dataroot_lq: ../testing_lr_images
+    io_backend:
+      type: disk
+
+# network structures
+network_g:
+  type: RRDBNet
+  num_in_ch: 3
+  num_out_ch: 3
+  num_feat: 64
+  num_block: 23
+  num_grow_ch: 32
+
+# path
+path:
+  pretrain_network_g: path/to/ckpt
+  strict_load_g: true
+
+# validation settings
+val:
+  save_img: True
+  suffix: ~
